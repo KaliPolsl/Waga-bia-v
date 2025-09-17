@@ -72,3 +72,46 @@ Poniższy schemat przedstawia logikę połączeń na płytce uniwersalnej.
            Pin3 (DRIVE_B) -----------------> GND
            Pin4 (SENSE_B) -----------------> GND
 
+
+
+
+```
+## Instrukcja Uruchomienia
+
+Projekt został stworzony w środowisku **PlatformIO** wewnątrz Visual Studio Code.
+
+1.  **Sklonuj repozytorium:**
+    ```bash
+    git clone [https://github.com/twoja_nazwa_uzytkownika/twoje_repozytorium.git](https://github.com/KaliPolsl/Waga-bia-v.git)
+    ```
+
+2.  **Otwórz projekt:** Otwórz folder z projektem w Visual Studio Code z zainstalowanym dodatkiem PlatformIO.
+
+3.  **Skonfiguruj projekt:** Otwórz plik `src/main.cpp` i zmień wartości w sekcji `KONFIGURACJA WiFi` oraz `apiKey` dla ThingSpeak.
+
+4.  **Wgraj kod:** Podłącz ESP32 do komputera i kliknij przycisk "Upload" w PlatformIO. Wszystkie potrzebne biblioteki zostaną pobrane i zainstalowane automatycznie.
+
+## Konfiguracja i Kalibracja
+
+Przed pierwszym użyciem należy skonfigurować w kodzie (`src/main.cpp`) następujące parametry:
+
+*   **`ssid`**: Nazwa Twojej sieci Wi-Fi.
+*   **`password`**: Hasło do Twojej sieci Wi-Fi.
+*   **`apiKey`**: Klucz API do zapisu ("Write API Key") z Twojego kanału na ThingSpeak.
+*   **`kalibracjaWagi`**: Współczynnik kalibracji wagi.
+
+### Instrukcja Kalibracji
+
+1.  Otwórz **Serial Monitor** w PlatformIO.
+2.  Gdy waga będzie pusta, wyślij w monitorze literę **`t`** i wciśnij Enter, aby wytarować urządzenie.
+3.  Postaw na wadze obiekt o dokładnie znanej masie (np. butelkę wody 1.5kg).
+4.  Odczytaj wagę, którą pokazuje program (np. `Pokazywana_Waga_kg`).
+5.  Oblicz nowy współczynnik, używając poniższego wzoru, bazując na **ostatnim działającym** współczynniku w kodzie:
+
+    `Nowy_Współczynnik = Obecny_Współczynnik * (Rzeczywista_Waga_kg / Pokazywana_Waga_kg)`
+
+6.  Wpisz nowo obliczoną wartość do zmiennej `kalibracjaWagi` w kodzie i wgraj go ponownie.
+
+## Licencja
+
+Ten projekt jest udostępniany na licencji MIT. Zobacz plik [LICENSE](LICENSE) po szczegóły.
