@@ -1,0 +1,35 @@
+# Nazwa Twojego automatycznego procesu
+name: Sprawdzenie Kompilacji PlatformIO
+
+# Kiedy proces ma siê uruchamiaæ?
+# - przy ka¿dym push do ga³êzi main
+# - przy ka¿dym pull request do ga³êzi main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Nazwa zadania
+  build:
+    # Na jakim systemie ma dzia³aæ robot
+    runs-on: ubuntu-latest
+
+    steps:
+      # Krok 1: Pobranie Twojego kodu z repozytorium
+      - uses: actions/checkout@v3
+
+      # Krok 2: Instalacja Pythona, który jest potrzebny dla PlatformIO
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # Krok 3: Instalacja samego PlatformIO
+      - name: Instalacja PlatformIO Core
+        run: pip install --upgrade platformio
+
+      # Krok 4: Uruchomienie kompilacji projektu
+      # Jeœli ten krok siê nie powiedzie, ca³y proces zg³osi b³¹d
+      - name: Kompilacja Projektu
+        run: pio run
