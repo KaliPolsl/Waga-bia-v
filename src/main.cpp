@@ -5,8 +5,8 @@
 
 // --- KONFIGURACJA WiFi ---
 const char* ssid = "Redmi Note 9 Pro";
-const char* password = "12345678";
-String apiKey = "ESUGMCKYJXTKFVTZ";
+const char* password = "haslo";
+String apiKey = "API_KEY";
 
 // --- KONFIGURACJA PINÓW ---
 const int HX711_DT_PIN = 22;  // D22
@@ -135,4 +135,5 @@ void loop() {
     // Wyślij do ThingSpeak
     wyslijDoThingSpeak(ostatniaWagaKg);
   }
+
 }
